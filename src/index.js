@@ -44,19 +44,16 @@ function checksTodoExists(request, response, next) {
   const { id } = request.params;
 
   const user = users.find((user) => user.username === username);
-
   if (!user) {
     return response.status(404).json({ error: "User not exist" });
   }
 
   const verifyUuid = validate(id);
-
   if (!verifyUuid) {
     return response.status(400).json({ error: "Id not valid" });
   }
 
   const todo = user.todos.find((todo) => todo.id === id);
-
   if (!todo) {
     return response.status(404).json({ error: "Todo not exist" });
   }
